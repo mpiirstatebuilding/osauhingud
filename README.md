@@ -9,8 +9,9 @@ See on Flask-põhine veebirakendus osaühingute asutamiseks, otsimiseks ja vaata
 
 ## Paigaldamine
 
-1. **Liikuge projekti kausta:**
+1. **Laadige projekt alla:**
 ```bash
+git clone https://github.com/mpiirstatebuilding/osauhingud.git
 cd osauhingud
 ```
 
