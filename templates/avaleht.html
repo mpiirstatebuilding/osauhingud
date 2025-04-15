@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>Avaleht</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Osaühingute otsing</h1>
+    <a href="{{ url_for('asutamine') }}">Asuta uus osaühing</a>
+    <div class="form">
+        <form method="get">
+            <label for="nimi">Osaühingu nimi:</label>
+            <input type="text" id="nimi" name="nimi" value="{{ nimi }}">
+            <label for="registrikood">Osaühingu registrikood:</label>
+            <input type="text" id="registrikood" name="registrikood" value="{{ registrikood }}">
+            <label for="osaniku_nimi">Osaniku nimi:</label>
+            <input type="text" id="osaniku_nimi" name="osaniku_nimi" value="{{ osaniku_nimi }}">
+            <label for="osaniku_kood">Osaniku kood:</label>
+            <input type="text" id="osaniku_kood" name="osaniku_kood" value="{{ osaniku_kood }}">
+            <button type="submit">Otsi</button>
+        </form>
+        <form method="get">
+            <button type="submit">Tühista otsing</button>
+        </form>
+    </div>
+
+    <h2>Tulemused:</h2>
+    {% if tulemused %}
+        <ul>
+            {% for ou in tulemused %}
+                <li>
+                    <a href="{{ url_for('osauhing_vaade', id=ou.id) }}">
+                        {{ ou.nimi }} ({{ ou.registrikood }})
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Ei leitud tulemusi.</p>
+    {% endif %}
+</body>
+</html>

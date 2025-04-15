@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>Asuta uus osaühing</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>Osaühingu asutamine</h1>
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class="errors">
+          {% for msg in messages %}<li>{{ msg }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form class="form" method="post">
+        <label>Nimi: <input name="nimi" required></label><br>
+        <label>Registrikood: <input name="registrikood" required></label><br>
+        <label>Asutamiskuupäev: <input type="date" name="asutamiskuupaev" required></label><br>
+        <label>Kogukapital (€): <input type="number" name="kogukapital" min="2500" required></label><br>
+
+        <h2>Osanikud</h2>
+        {% for osanik in osanikud %}
+            <div>
+                <input type="checkbox" name="osanik_id" value="{{ osanik.id }}">
+                <label>
+                    {% if osanik.tyyp == 'füüsiline' %}
+                        {{ osanik.fyysiline_isik.eesnimi }} {{ osanik.fyysiline_isik.perekonnanimi }}
+                    {% else %}
+                        {{ osanik.juriidiline_isik.nimi }}
+                    {% endif %}
+                </label>
+                <input type="number" name="osa_suurus" min="1" placeholder="Osakapital €">
+            </div>
+        {% endfor %}
+
+        <button type="submit">Salvesta</button>
+    </form>
+    <a href="/">Tagasi avalehele</a>
+</body>
+</html>

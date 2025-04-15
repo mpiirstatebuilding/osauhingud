@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ ou.nimi }}</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <h1>{{ ou.nimi }}</h1>
+    <p><strong>Registrikood:</strong> {{ ou.registrikood }}</p>
+    <p><strong>Asutatud:</strong> {{ ou.asutamiskuupaev }}</p>
+    <p><strong>Kogukapital:</strong> {{ ou.kogukapital }} €</p>
+
+    <h2>Osanikud</h2>
+    <ul>
+        {% for osa in ou.osad %}
+            <li>
+                {% if osa.osanik.tyyp == 'füüsiline' %}
+                    {{ osa.osanik.fyysiline_isik.eesnimi }} {{ osa.osanik.fyysiline_isik.perekonnanimi }} ({{ osa.osanik.fyysiline_isik.isikukood }})
+                {% else %}
+                    {{ osa.osanik.juriidiline_isik.nimi }} ({{ osa.osanik.juriidiline_isik.registrikood }})
+                {% endif %}
+                - {{ osa.suurus }} € {% if osa.on_asutaja %}(asutaja){% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="/">Tagasi avalehele</a>
+</body>
+</html>
